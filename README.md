@@ -1,63 +1,48 @@
+### Step-by-Step Instructions
 
-# Rust Dev Container Example
+1. **Open the Command Palette in Codespaces:**
+   - In your Codespace (VS Code in the browser), press `F1` or `Ctrl+Shift+P` (Cmd+Shift+P on Mac).
+   - Type **"dev"** in the search bar.  
+   - **Select:** *"Codespaces: Add Dev Container Configuration Files..."*  
+     *(As shown in the image you posted where "Codespaces: Add Dev Container Configuration Files..." appears in the command palette.)*
 
-This repository showcases how to set up a Rust development environment using a VS Code Dev Container. It leverages a `.devcontainer.json` file for container configuration and a `Dockerfile` to handle system-level changes, such as installing additional packages.
+2. **Choose the Dev Container Template:**
+   - A dialog will appear asking you to pick a template for your dev container.
+   - Type or scroll to **"Rust"** and select the Rust dev container template.  
+     *(As shown in your next image, you typed "rust" and selected the Rust template.)*
 
-## Features
+3. **Select the Debian OS Version:**
+   - Next, you’ll see a prompt to select a Debian OS version (e.g. `bullseye` by default).
+   - If you want to change it, choose the version from the dropdown. Otherwise, keep the default.
+   - Press **Enter** or **OK** to confirm.  
+     *(This corresponds to the image where you selected `bullseye`.)*
 
-- **Rust Toolchain:** Pre-installed `rustc`, `cargo`, and `rustup` to streamline development.
-- **Custom Dockerfile:** Allows you to modify the underlying image, including installing packages via `apt-get`.
-- **VS Code Extensions:** Easily integrate and automate the installation of extensions like GitHub Copilot and Rust Analyzer.
-- **Development Environment in Isolation:** Run your development environment in a container, ensuring consistency across different machines.
+4. **Choose Additional Features:**
+   - Another dialog might appear asking if you’d like to add additional features or tools. For example, extra utilities or language servers.
+   - If you don’t need any extras, simply proceed without selecting anything.  
+     *(This corresponds to the image showing "0 Selected" for additional features.)*
+   - Press **OK** to continue.
 
-## Getting Started
+5. **Confirm and Generate the Files:**
+   - After selecting the OS version and any features, press **OK**.
+   - Codespaces will now generate a `.devcontainer` folder in your project with a `devcontainer.json` file (and possibly a `Dockerfile`) tailored to Rust development.  
+     *(This step corresponds to when you said "I've hit OK" in your instructions.)*
 
-### Prerequisites
+6. **Rebuild the Container:**
+   - Once the files are generated, you’ll see a prompt or can open the Command Palette again.
+   - Type **"rebuild"** and select *"Codespaces: Rebuild Container"*.
+   - This will shut down the current container environment and rebuild it according to the new configuration.  
+     *(As shown in your screenshot where you typed “rebu” and selected “Codespaces: Rebuild Container”.)*
 
-- **Docker:** Make sure Docker is installed and running on your system.
-- **VS Code:** Ensure you have Visual Studio Code installed.
-- **Remote Containers Extension:** Install the "Remote - Containers" extension in VS Code. (This has since been integrated as "Dev Containers" in recent versions.)
+7. **Wait for the Container to Finish Building:**
+   - Codespaces will run through the Dockerfile and `devcontainer.json` steps, setting up the environment. This includes installing Rust, Cargo, and other specified tools.
+   - Once done, you’ll have a fully configured Rust development environment inside your Codespace.
 
-### Setup Steps
-
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/your-username/rust-devcontainer-example.git
-   cd rust-devcontainer-example
-   ```
-
-2. **Open in VS Code:**
-   Open this folder in VS Code (e.g., `code .` from the terminal or via the GUI).
-
-3. **Open the Dev Container:**
-   - Press `F1` in VS Code and select **Dev Containers: Rebuild and Reopen in Container**.
-   - VS Code will use the `.devcontainer/devcontainer.json` and the provided `Dockerfile` to build and start the container.
-
-4. **Customizing the Container:**
-   - Edit the `.devcontainer/devcontainer.json` file to install or configure additional VS Code extensions.
-   - Update the `Dockerfile` to add system-level tools. For example:
-     ```dockerfile
-     FROM mcr.microsoft.com/vscode/devcontainers/rust:latest
-     ENV DEBIAN_FRONTEND=noninteractive
-     RUN apt-get update && apt-get install -y curl make git
+8. **Verify Rust and Cargo:**
+   - Open a terminal in your Codespace (`Terminal > New Terminal`).
+   - Run:
+     ```bash
+     rustc --version
+     cargo --version
      ```
-   - After making changes, rebuild the container to apply them.
-
-### Testing the Setup
-
-Once the container is running:
-
-- Open a terminal within the container (`Terminal > New Terminal`).
-- Run:
-  ```bash
-  cargo run
-  ```
-  This command will compile and run the default Rust "Hello, world!" project.
-  
-- Test Rust Analyzer and Copilot by editing `src/main.rs` and watching for suggestions, code completions, and linting feedback.
-
-### Notes
-
-- **Extensions:** Additional VS Code extensions can be declared in the `devcontainer.json` file. After rebuilding the container, these will be automatically installed.
-- **System-Level Dependencies:** Use the `Dockerfile` for OS-level changes like installing system packages, configuring environment variables, or adding tools not available by default.
-
+   - You should see Rust and Cargo version information, confirming the tools are successfully installed.
